@@ -1,7 +1,7 @@
 import { combineReducers } from './combineReducers';
 import { gameCenterReducer } from './game-center/game.center.reducer';
 import { userReducer } from './user/user.reducer';
-import { EmptyCurrentGame } from '../models/GameCenter';
+// import { EmptyCurrentGame } from '../models/GameCenter';
 
 
 /*
@@ -9,13 +9,15 @@ import { EmptyCurrentGame } from '../models/GameCenter';
 */
 export const initialState: AppState = {
   gameCenter: {
-    name: "",
-    loading: false,
-    menuEnabled: true,
-    currentGame: EmptyCurrentGame,
-    beacons: [],
+    id: 1,
+    name: "Prototype One",
+    byline: "React/Typescript/Ionic",
+    banner: "",
     games: [],
+    users: [],
     gamesPlayed: [],
+    loading: false,
+    menuEnabled: true
   },
   user: {
     hasSeenTutorial: false,
