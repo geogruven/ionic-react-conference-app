@@ -1,16 +1,11 @@
-import React, {useState} from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonMenuButton, IonTitle, IonButtons, IonButton, 
+import React from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonMenuButton, IonTitle, IonButtons, 
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
 import './Home.scss';
 
 interface HomeProps { }
 
 const Home: React.FC<HomeProps> = () => {
-
-  const name="George";
-
-  const [tokens,setTokens] = useState(7);
-
 
   return (
     <IonPage id="home-page">

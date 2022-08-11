@@ -63,8 +63,8 @@ const Maze: React.FC<MazeProps> = ({
 }) => {
   const [showAlert, setShowAlert] = useState(false);
   var scanBeacons: boolean;
-  var beaconsInitialized: boolean;
-  var staleRssiScanner: NodeJS.Timeout;
+  // var beaconsInitialized: boolean;
+  // var staleRssiScanner: NodeJS.Timeout;
 
   useEffect(() => {
     if (currentGame.mazePath.length === 0) {
@@ -85,8 +85,8 @@ const Maze: React.FC<MazeProps> = ({
     setCurrentGame(0);
   });
 
-  async function startBeacons(): Promise<void> {
-    /*
+/*  async function startBeacons(): Promise<void> {
+
     try {
       if (beaconsInitialized === undefined || beaconsInitialized === false) {
         await BleClient.initialize();
@@ -113,9 +113,9 @@ const Maze: React.FC<MazeProps> = ({
     } catch (error) {
       console.log(`>>>ERROR  BleClient.initialize() called: result: ${error}`);
     }
-    */
   }
-
+  */
+  /*
   async function processMazeBeacon(deviceId: string, rssi: number) {
     let beacon = beacons.find(function (beacon) {
       return beacon.id === deviceId;
@@ -128,7 +128,7 @@ const Maze: React.FC<MazeProps> = ({
       );
     }
   }
-
+*/
   async function stopBeacons(): Promise<void> {
     /*
     scanBeacons = false;
