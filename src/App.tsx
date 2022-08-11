@@ -26,7 +26,7 @@ import './theme/variables.css';
 import MainTabs from './pages/MainTabs';
 import { connect } from './data/connect';
 import { AppContextProvider } from './data/AppContext';
-import { loadConfData } from './data/sessions/sessions.actions';
+//import { loadConfData } from './data/sessions/sessions.actions';
 import { setIsLoggedIn, setUsername, loadUserData } from './data/user/user.actions';
 import Account from './pages/Account';
 import Login from './pages/Login';
@@ -34,7 +34,7 @@ import Signup from './pages/Signup';
 import Support from './pages/Support';
 import Tutorial from './pages/Tutorial';
 import HomeOrTutorial from './components/HomeOrTutorial';
-import { Schedule } from "./models/Schedule";
+//import { Schedule } from "./models/Schedule";
 import RedirectToLogin from './components/RedirectToLogin';
 
 setupIonicReact();

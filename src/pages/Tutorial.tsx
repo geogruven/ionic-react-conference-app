@@ -3,7 +3,7 @@ import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonI
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 import { Swiper as SwiperCore } from 'swiper';
 import { arrowForward } from 'ionicons/icons';
-import { setMenuEnabled } from '../data/sessions/sessions.actions';
+// import { setMenuEnabled } from '../data/sessions/sessions.actions';
 import { setHasSeenTutorial } from '../data/user/user.actions';
 import './Tutorial.scss';
 import 'swiper/swiper.min.css';
@@ -15,23 +15,23 @@ interface OwnProps extends RouteComponentProps {};
 
 interface DispatchProps {
   setHasSeenTutorial: typeof setHasSeenTutorial;
-  setMenuEnabled: typeof setMenuEnabled;
+  // setMenuEnabled: typeof setMenuEnabled;
 }
 
 interface TutorialProps extends OwnProps, DispatchProps { };
 
-const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMenuEnabled }) => {
+const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, /*setMenuEnabled*/ }) => {
   const [showSkip, setShowSkip] = useState(true);
   let [swiper, setSwiper] = useState<SwiperCore>();
 
   useIonViewWillEnter(() => {
-    setMenuEnabled(false);
+    /*setMenuEnabled(false); */
   });
   
   const startApp = async () => { 
     await setHasSeenTutorial(true);
-    await setMenuEnabled(true);
-    history.push('/tabs/schedule', { direction: 'none' });
+    /* await setMenuEnabled(true); */
+    history.push('/tabs/home', { direction: 'none' });
   };
 
   const handleSlideChangeStart = () => { 
@@ -54,26 +54,26 @@ const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMen
           <SwiperSlide>
             <img src="assets/img/ica-slidebox-img-1.png" alt="" className="slide-image" />
             <h2 className="slide-title">
-              Welcome to <b>ICA</b>
+            <b> Western Mass<br/>Family Game Center Tutorial</b>
             </h2>
             <p>
-              The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.
+              Welcome to the new <b>Game Center</b> mobile app.  This tutorial is a quick introduction. Swipe to page.
             </p>
           </SwiperSlide>
 
           <SwiperSlide>
             <img src="assets/img/ica-slidebox-img-2.png" alt="" className="slide-image" />
-            <h2 className="slide-title">What is Ionic?</h2>
+            <h2 className="slide-title">What is Game Center?</h2>
             <p>
-              <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.
+              <b>Game Center</b> is a mobile based collection of games with built in ticketing, scoring and history.
             </p>
           </SwiperSlide>
 
           <SwiperSlide>
             <img src="assets/img/ica-slidebox-img-3.png" alt="" className="slide-image" />
-            <h2 className="slide-title">What is Ionic Appflow?</h2>
+            <h2 className="slide-title">Make A Maze</h2>
             <p>
-              <b>Ionic Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a totally new level of app development agility to mobile dev teams.
+            <b>Make A Maze</b> allows you to create your very own maze. A challenge to share.
             </p>
           </SwiperSlide>
 
@@ -94,7 +94,7 @@ const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMen
 export default connect<OwnProps, {}, DispatchProps>({
   mapDispatchToProps: ({
     setHasSeenTutorial,
-    setMenuEnabled
+    // setMenuEnabled
   }),
   component: Tutorial
 });

@@ -1,0 +1,24 @@
+ion-col {
+    border: 1px solid grey;
+    text-align: center;
+    height: 12vw;
+    width: 12vw;
+  }
+
+  .maze {
+      background-color: lightgray;
+      width: 100%;
+      height: 100vw;
+  }
+
+  ion-grid {
+    background-color: white;
+    width: 100%;
+    height: 100vw;
+}
+
+.maze-button {
+  background-color: white;
+  width: 11.6vw;
+  height: 11vw;
+}

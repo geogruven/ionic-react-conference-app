@@ -1,39 +1,42 @@
 import { Plugins } from '@capacitor/core';
-import { Schedule, Session } from '../models/Schedule';
-import { Speaker } from '../models/Speaker';
-import { Location } from '../models/Location';
+
+// Model
+import {EmptyCurrentGame, Game} from '../models/GameCenter';
+import { MazeBeacon } from '../models/games/MazeBeacon';
+import { GamePlayed } from '../models/games/GamePlayed'
 
 const { Storage } = Plugins;
 
-const dataUrl = '/assets/data/data.json';
-const locationsUrl = '/assets/data/locations.json';
+// data URLs
+const gameCenterUrl = '/assets/data/game-center.json';
 
 const HAS_LOGGED_IN = 'hasLoggedIn';
 const HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 const USERNAME = 'username';
+const GAMES_PLAYED = 'gamesPlayed';
 
-export const getConfData = async () => {
+export const getGameCenterData = async () => {
   const response = await Promise.all([
-    fetch(dataUrl),
-    fetch(locationsUrl)]);
+    fetch(gameCenterUrl)]);
   const responseData = await response[0].json();
-  const schedule = responseData.schedule[0] as Schedule;
-  const sessions = parseSessions(schedule);
-  const speakers = responseData.speakers as Speaker[];
-  const locations = await response[1].json() as Location[];
-  const allTracks = sessions
-    .reduce((all, session) => all.concat(session.tracks), [] as string[])
-    .filter((trackName, index, array) => array.indexOf(trackName) === index)
-    .sort();
-
+  const name:string = responseData.name;
+  const loading = true;
+  const beacons = responseData.beacons as MazeBeacon[];
+  const games = responseData.games as Game[];
+  const currentGame = EmptyCurrentGame;
+  const response2 = await Promise.all([
+    Storage.get({ key: GAMES_PLAYED})]);
+  const gamesPlayedStr = await response2[0].value;
+  const gamesPlayed:GamePlayed[] = gamesPlayedStr === null ? []: JSON.parse(gamesPlayedStr);
   const data = {
-    schedule,
-    sessions,
-    locations,
-    speakers,
-    allTracks,
-    filteredTracks: [...allTracks]
+    name,
+    loading,
+    currentGame,
+    beacons,
+    games,
+    gamesPlayed
   }
+
   return data;
 }
 
@@ -41,14 +44,15 @@ export const getUserData = async () => {
   const response = await Promise.all([
     Storage.get({ key: HAS_LOGGED_IN }),
     Storage.get({ key: HAS_SEEN_TUTORIAL }),
-    Storage.get({ key: USERNAME })]);
-  const isLoggedin = await response[0].value === 'true';
-  const hasSeenTutorial = await response[1].value === 'true';
-  const username = await response[2].value || undefined;
+    Storage.get({ key: USERNAME }),
+    Storage.get({ key: GAMES_PLAYED})]);
+  const isLoggedin = true; // await response[0].value === 'true';
+  const hasSeenTutorial = true; // await response[1].value === 'true';
+  const username = await response[2].value || "player";
   const data = {
     isLoggedin,
     hasSeenTutorial,
-    username
+    username,
   }
   return data;
 }
@@ -69,10 +73,6 @@ export const setUsernameData = async (username?: string) => {
   }
 }
 
-function parseSessions(schedule: Schedule) {
-  const sessions: Session[] = [];
-  schedule.groups.forEach(g => {
-    g.sessions.forEach(s => sessions.push(s))
-  });
-  return sessions;
+export const setGamesPlayedData = async (gamesPlayed:GamePlayed[]) => {
+  await Storage.set({ key: GAMES_PLAYED, value: JSON.stringify(gamesPlayed)});
 }

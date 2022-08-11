@@ -1,0 +1,124 @@
+/* board is a maze */
+.board .board-row:last-child .board-cell {
+    margin-bottom: 0px;
+  }
+ /* board cell in a board row on a board */ 
+.board .board-row .board-cell {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;  
+  background-color: white;  
+  /* height: 100%;
+  width: 100%; */
+  margin: 0;
+  cursor: pointer;
+}
+
+.board .board-row .board-cell:last-child {
+  margin-right: 20px;  
+}
+
+.board .board-row .board-cell.selected {
+  background-color: #aaa;
+}
+
+.board .board-row .board-cell .board-cell-content {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0000dd;
+  font-size: 10pt;
+  font-weight: 600;
+  background-color: white;
+  padding: 0em;
+}
+
+.square {
+    padding: 0px;
+    cursor: default;
+    background-color: lightgray;
+}
+
+.square-enterable {
+  padding: 0px;
+  cursor: pointer;
+  background-color: green;
+}
+
+.square-path {
+  padding: 0px;
+  cursor: default;
+  background-color:  yellowgreen; /* #9B7653; */
+}
+
+.square-path-review {
+  padding: 0px;
+  cursor: default;
+  background-color:  yellowgreen; /* #9B7653; */
+}
+
+.square-exit-cell {
+  padding: 0px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.square-entry-cell {
+  padding: 0px;
+  cursor: default;
+  background-color: yellow;
+}
+
+.square-current-cell {
+  padding: 0px;
+  cursor: default;
+  background-color: white;
+}
+
+.square-previous-cell {
+  padding: 0px;
+  cursor: default;
+  background-color: green;
+}
+
+.path-in-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 40;
+}
+
+.path-out-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 30;
+}
+
+.path-in-trace-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 20;
+}
+
+.path-out-trace-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+}
+
+.square-label {
+  display: none;
+  position: relative;
+  z-index: 60;
+  top: 35%;
+  font-weight: bold;
+}

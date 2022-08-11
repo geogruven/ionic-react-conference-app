@@ -1,30 +1,32 @@
 import { combineReducers } from './combineReducers';
-import { sessionsReducer } from './sessions/sessions.reducer';
+import { gameCenterReducer } from './game-center/game.center.reducer';
 import { userReducer } from './user/user.reducer';
+import { EmptyCurrentGame } from '../models/GameCenter';
 
+
+/*
+* initialState() returns AppState type
+*/
 export const initialState: AppState = {
-  data: {
-    schedule: { groups: [] } as any,
-    sessions: [],
-    speakers: [],
-    favorites: [],
-    locations: [],
-    allTracks: [],
-    filteredTracks: [],
-    mapCenterId: 0,
+  gameCenter: {
+    name: "",
     loading: false,
-    menuEnabled: true
+    menuEnabled: true,
+    currentGame: EmptyCurrentGame,
+    beacons: [],
+    games: [],
+    gamesPlayed: [],
   },
   user: {
     hasSeenTutorial: false,
     darkMode: false,
     isLoggedin: false,
-    loading: false
+    loading: false,
   }
 };
 
 export const reducers = combineReducers({
-  data: sessionsReducer,
+  gameCenter: gameCenterReducer,
   user: userReducer
 });
 
