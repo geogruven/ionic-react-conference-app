@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import Menu from './components/Menu';
@@ -26,7 +26,7 @@ import './theme/variables.css';
 import MainTabs from './pages/MainTabs';
 import { connect } from './data/connect';
 import { AppContextProvider } from './data/AppContext';
-//import { loadConfData } from './data/sessions/sessions.actions';
+import { loadGameCenterData } from './data/game-center/game.center.actions';
 import { setIsLoggedIn, setUsername, loadUserData } from './data/user/user.actions';
 import Account from './pages/Account';
 import Login from './pages/Login';
@@ -34,10 +34,15 @@ import Signup from './pages/Signup';
 import Support from './pages/Support';
 import Tutorial from './pages/Tutorial';
 import HomeOrTutorial from './components/HomeOrTutorial';
-//import { Schedule } from "./models/Schedule";
 import RedirectToLogin from './components/RedirectToLogin';
+import Maze from './pages/games/Maze';
+// setupIonicReact();
+// Per Ionic Upgrade to 6 docs
+import {setupIonicReact } from '@ionic/react';
 
-setupIonicReact();
+setupIonicReact({
+  mode: 'md'
+});
 
 const App: React.FC = () => {
   return (
@@ -49,11 +54,10 @@ const App: React.FC = () => {
 
 interface StateProps {
   darkMode: boolean;
-  schedule: Schedule;
 }
 
 interface DispatchProps {
-  loadConfData: typeof loadConfData;
+  loadGameCenterData: typeof loadGameCenterData;
   loadUserData: typeof loadUserData;
   setIsLoggedIn: typeof setIsLoggedIn;
   setUsername: typeof setUsername;
@@ -61,18 +65,16 @@ interface DispatchProps {
 
 interface IonicAppProps extends StateProps, DispatchProps { }
 
-const IonicApp: React.FC<IonicAppProps> = ({ darkMode, schedule, setIsLoggedIn, setUsername, loadConfData, loadUserData }) => {
+const IonicApp: React.FC<IonicAppProps> = ({ darkMode, setIsLoggedIn, setUsername, loadGameCenterData, loadUserData }) => {
 
   useEffect(() => {
     loadUserData();
-    loadConfData();
+    loadGameCenterData();
     // eslint-disable-next-line
   }, []);
 
   return (
-    schedule.groups.length === 0 ? (
-      <div></div>
-    ) : (
+    
         <IonApp className={`${darkMode ? 'dark-theme' : ''}`}>
           <IonReactRouter>
             <IonSplitPane contentId="main">
@@ -88,6 +90,8 @@ const IonicApp: React.FC<IonicAppProps> = ({ darkMode, schedule, setIsLoggedIn, 
                 <Route path="/signup" component={Signup} />
                 <Route path="/support" component={Support} />
                 <Route path="/tutorial" component={Tutorial} />
+                <Route path="/games" render={() => <MainTabs />} />
+              <Route path="/games/maze" component={Maze} />
                 <Route path="/logout" render={() => {
                   return <RedirectToLogin
                     setIsLoggedIn={setIsLoggedIn}
@@ -100,7 +104,6 @@ const IonicApp: React.FC<IonicAppProps> = ({ darkMode, schedule, setIsLoggedIn, 
           </IonReactRouter>
         </IonApp>
       )
-  )
 }
 
 export default App;
@@ -108,8 +111,7 @@ export default App;
 const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     darkMode: state.user.darkMode,
-    schedule: state.data.schedule
   }),
-  mapDispatchToProps: { loadConfData, loadUserData, setIsLoggedIn, setUsername },
+  mapDispatchToProps: { loadGameCenterData, loadUserData, setIsLoggedIn, setUsername },
   component: IonicApp
 });

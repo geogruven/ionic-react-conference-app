@@ -1,0 +1,103 @@
+.square {
+    padding: 0px;
+    cursor: default;
+    background-color: lightgray;
+}
+
+.square-enterable {
+  padding: 0px;
+  cursor: pointer;
+  background-color: green;
+}
+
+.square-path {
+  padding: 0px;
+  cursor: default;
+  background-color:  yellowgreen; /* #9B7653; */
+}
+
+.square-path-review {
+  padding: 0px;
+  cursor: default;
+  background-color:  yellowgreen; /* #9B7653; */
+}
+
+.square-exit-cell {
+  padding: 0px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.square-entry-cell {
+  padding: 0px;
+  cursor: default;
+  background-color: yellow;
+}
+
+.square-current-cell {
+  padding: 0px;
+  cursor: default;
+  background-color: white;
+}
+
+.square-previous-cell {
+  padding: 0px;
+  cursor: default;
+  background-color: green;
+}
+
+.path-in-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 4;
+}
+
+.path-out-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+}
+
+.path-in-trace-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+}
+
+.path-out-trace-svg {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+.square-label {
+  display: block;
+  position: relative;
+  z-index: 5;
+  top: 35%;
+  font-weight: bold;
+}
+
+.step-row-show {
+  /* width: 100%;
+  height: 2em; */
+  display: block;
+}
+
+.step-row-hide {
+  /* width: 100%;
+  height: 2em; */
+  display: none;
+}
